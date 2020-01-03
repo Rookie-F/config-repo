@@ -1,1 +1,31 @@
-
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://120.25.167.21:1433;DatabaseName=developmentdb
+    username: sa
+    password: CPlus_CloudServerPasS
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 8
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 150MB
+  sqlserver:
+    console:
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2008Dialect
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #jpa与数据库字段映射规则
+    open-in-view: false
+  mvc:
+    static-path-pattern: /**
