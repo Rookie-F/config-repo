@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: prod
+  application:
+    name: wisdomcloud
+  boot:
+    admin:
+      client:
+        url: http://192.168.1.185:8080 #http://192.168.8.115:8080  #http://hwdedu.mzapi.com:8181
+  thymeleaf:
+    check-template-location: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+logging:
+  config: classpath:logback-spring.xml
+  path: appdata/logs
+  file: appdata/logs/info.log
+# 交易确认时间间隔，秒
+transaction-confirmation-interval: 5
+initTask: "*/10 * * * * *"
+DormScreenTask: "00 20 08 ? * *"
+DataInitTask: "*/5 * * * * ?"
+#系统初始化参数
+system-init-params:
+  permission: '{"department_enable":"Y","equipment_enable":"Y","merchant_enable":"Y","dormitory_enable":"Y"}'
+  message_push: '{"wx_news_push_type":"","personnel":"12","way":"13","remind_the_time":"10"}'
+  consumption: '{"withdraw_wallet":"1","working_mode":"2","write_card":true}'
+  physical_card: '{"card_type":"CPU","system_unique_factor":"0401040100ABCDEF","public_sector":"7","water_sector":"3","consume_over_sector":"6",
+  "consume_main_sector":"5","reserve_sector":"8"}'
+mybatis:
+  type-aliases-package: com.hwd.wisdomcloud.*.model
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句
+mapper:
+  style: normal
